@@ -9,11 +9,18 @@ const fetchShow = async () => {
 
 const editTitle = async () => {
     const title = document.getElementById('title');
-    const chosenShow = await fetchShow();
-    const titleLanguage = chosenShow?.data.title_english ? chosenShow?.data.title_english : chosenShow?.data.title_japanese;
+    title.innerText = "Loading..."
 
-    title.innerText = titleLanguage;
+    const chosenShow = await fetchShow();
+
+    if (chosenShow?.data.title_english ?? editTitle()) {
+        title.innerText = chosenShow?.data.title_english;
+    }
 }
 
-editTitle();
+
+
+const button = document.getElementById('randomize');
+
+button.addEventListener('click', editTitle);
 
